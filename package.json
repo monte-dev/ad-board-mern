@@ -1,0 +1,24 @@
+{
+	"name": "ad-board-mern",
+	"version": "1.0.0",
+	"description": "full stack application for advertisment board",
+	"main": "index.js",
+	"repository": "git@github.com:monte-dev/ad-board-mern.git",
+	"author": "monte-dev <badziobw@gmail.com>",
+	"scripts": {
+		"start": "npm-run-all -l -p start:*",
+		"start:server": "nodemon server.js",
+		"start:client": "cd client && yarn start",
+		"build": "cd client && yarn install && yarn build",
+		"postinstall": "cd client && yarn install"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.18.2",
+		"express-formidable": "^1.2.0",
+		"mongoose": "^7.4.2",
+		"nodemon": "^3.0.1",
+		"npm-run-all": "^4.1.5"
+	}
+}
