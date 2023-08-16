@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const advertSchema = new mongoose.Schema({
+const adSchema = new mongoose.Schema({
 	title: { type: String, required: true, minlength: 10, maxlength: 50 },
 	content: { type: String, required: true, minlength: 20, maxlength: 1000 },
 	publishedDate: { type: Date, default: Date.now, required: true },
@@ -14,4 +14,4 @@ const advertSchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model('Advert', advertSchema);
+module.exports = mongoose.model('Ad', adSchema);
