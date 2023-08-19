@@ -49,6 +49,7 @@ exports.login = async (req, res) => {
 				res.status(400).send('Incorrect credentials');
 			} else {
 				if (bcrypt.compareSync(password, user.password)) {
+					req.session.login = user.login;
 					res.status(200).send({ message: 'Login Successful' });
 				} else {
 					res.status(400).send('Incorrect credentials');
@@ -59,5 +60,13 @@ exports.login = async (req, res) => {
 		}
 	} catch (error) {
 		return res.status(500).send({ message: error.message });
+	}
+};
+
+exports.getUser = async (req, res) => {
+	if (req.session.login) {
+		res.send({ login: req.session.login });
+	} else {
+		res.status(401).send({ message: 'no authorization' });
 	}
 };

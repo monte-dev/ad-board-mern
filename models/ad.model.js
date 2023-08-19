@@ -8,8 +8,7 @@ const adSchema = new mongoose.Schema({
 	price: { type: Number, required: true },
 	location: { type: String, required: true },
 	seller: {
-		type: String,
-		required: true,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 	},
 });

@@ -6,6 +6,7 @@ exports.getAll = async (req, res) => {
 			path: 'seller',
 			select: ['login', 'avatar', 'phoneNumber'],
 		});
+		res.json(ads);
 	} catch (err) {
 		res.status(500).json({ message: err });
 	}
