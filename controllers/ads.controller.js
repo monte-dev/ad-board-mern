@@ -12,7 +12,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
 	try {
-		const ad = await Ad.findById(req.params.id);
+		const ad = await Ad.findById(req.params.id).populate('seller');
 		if (!ad) res.status(404).json({ message: 'Not found' });
 		else res.json(ad);
 	} catch (err) {
@@ -67,6 +67,10 @@ exports.post = async (req, res) => {
 };
 exports.getBySearchPhrase = async (req, res) => {
 	try {
+		const ad = await Ad.find({
+			title: { $regex: req.params.searchPhrase, $options: 'i' },
+		}).populate('seller');
+		res.json(ad);
 	} catch (err) {
 		res.status(500).json({ message: err });
 	}
