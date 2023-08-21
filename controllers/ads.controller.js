@@ -1,5 +1,6 @@
 const Ad = require('../models/ad.model');
 const fs = require('fs');
+const sanitize = require('mongo-sanitize');
 
 exports.getAll = async (req, res) => {
 	try {
@@ -30,7 +31,7 @@ exports.post = async (req, res) => {
 			price,
 			location,
 			seller,
-		} = req.body;
+		} = sanitize(req.body);
 
 		const fileType = req.file
 			? await getImageFileType(req.file)
@@ -85,7 +86,7 @@ exports.updateById = async (req, res) => {
 			price,
 			location,
 			seller,
-		} = req.body;
+		} = sanitize(req.body);
 		const fileType = req.file
 			? await getImageFileType(req.file)
 			: 'unknown';

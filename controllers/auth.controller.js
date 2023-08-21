@@ -2,10 +2,11 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const getImageFileType = require('../utils/getImageFileType');
 const fs = require('fs');
+const sanitize = require('mongo-sanitize');
 
 exports.register = async (req, res) => {
 	try {
-		const { login, password, phoneNumber } = req.body;
+		const { login, password, phoneNumber } = sanitize(req.body);
 		const fileType = req.file
 			? await getImageFileType(req.file)
 			: 'unknown';
