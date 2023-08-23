@@ -19,6 +19,20 @@ const App = () => {
 		<main>
 			<Container>
 				<Header />
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					<Route path="/ad/:id" element={<Ad />}></Route>
+					<Route path="/ad/add" element={<AdAdd />}></Route>
+					<Route path="/ad/edit/:id" element={<AdRemove />}></Route>
+					<Route path="/ad/remove/:id" element={<AdEdit />}></Route>
+					<Route
+						path="/search/:searchPhrase"
+						element={<Search />}
+					></Route>
+					<Route path="/login" element={<Login />}></Route>
+					<Route path="/register" element={<Register />}></Route>
+					<Route path="*" element={<NotFound />}></Route>
+				</Routes>
 			</Container>
 		</main>
 	);
