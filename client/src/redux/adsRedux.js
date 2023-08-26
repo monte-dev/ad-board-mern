@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { API_URL } from '../config';
+
 /* SELECTORS */
 
 export const getAllAds = (state) => state.ads;
@@ -17,6 +20,61 @@ export const loadAd = (payload) => ({ type: LOAD_AD, payload });
 export const addAd = (payload) => ({ type: ADD_AD, payload });
 export const editAd = (payload) => ({ type: EDIT_AD, payload });
 export const removeAd = (payload) => ({ type: REMOVE_AD, payload });
+
+/* THUNKS */
+
+export const loadAdRequest = () => {
+	return async (dispatch) => {
+		try {
+			let res = await axios.get(`${API_URL}/ads`);
+			dispatch(loadAd(res.data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const addAdRequest = (adData) => {
+	return async (dispatch) => {
+		try {
+			const options = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+			await axios.post(`${API_URL}/ads`, adData, options);
+			dispatch(addAd(adData));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const editAdRequest = (adId, updatedData) => {
+	return async (dispatch) => {
+		try {
+			let res = await axios.put(`${API_URL}/ads/${adId}`, updatedData, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			dispatch(editAd(res.data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const removeAdRequest = (adId) => {
+	return async (dispatch) => {
+		try {
+			await axios.delete(`${API_URL}/ads/${adId}`);
+			dispatch(removeAd(adId));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
 
 /* INITIAL STATE */
 const initialState = [];
