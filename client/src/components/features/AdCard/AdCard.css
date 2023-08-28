@@ -1,0 +1,10 @@
+.ad-card {
+	border: 1px solid black;
+	margin-bottom: 20px;
+	display: flex;
+	height: 150px;
+}
+
+.ad-card--image {
+	width: 150px;
+}

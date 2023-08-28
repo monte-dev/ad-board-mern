@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer';
 
