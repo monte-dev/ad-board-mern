@@ -6,7 +6,10 @@ const AdCard = ({ ad }) => {
 	return (
 		<Card>
 			<Card.Body className="ad-card">
-				<Card.Img src={ad.image} className="ad-card--image"></Card.Img>
+				<Card.Img
+					src={`${process.env.PUBLIC_URL}/images/${ad.image}`}
+					className="ad-card--image"
+				></Card.Img>
 				<Card.Title>{ad.title}</Card.Title>
 				<Card.Text>{ad.location}</Card.Text>
 				<Button variant="primary">View</Button>
