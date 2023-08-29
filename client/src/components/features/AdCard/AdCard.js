@@ -4,7 +4,7 @@ import './AdCard.css';
 
 const AdCard = ({ ad }) => {
 	return (
-		<Card>
+		<Card className="mb-3">
 			<Card.Body className="ad-card">
 				<Card.Img
 					src={`${process.env.PUBLIC_URL}/images/${ad.image}`}
