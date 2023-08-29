@@ -1,18 +1,21 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import './AdCard.css';
+import { NavLink } from 'react-router-dom';
 
 const AdCard = ({ ad }) => {
 	return (
-		<Card className="mb-3">
-			<Card.Body className="ad-card">
+		<Card className="mb-3 ad-card">
+			<Card.Body className="ad-card--body">
 				<Card.Img
 					src={`${process.env.PUBLIC_URL}/images/${ad.image}`}
 					className="ad-card--image"
 				></Card.Img>
 				<Card.Title>{ad.title}</Card.Title>
 				<Card.Text>{ad.location}</Card.Text>
-				<Button variant="primary">View</Button>
+				<NavLink to={`/ad/${ad._id}`}>
+					<Button variant="primary">Read more</Button>
+				</NavLink>
 			</Card.Body>
 		</Card>
 	);
