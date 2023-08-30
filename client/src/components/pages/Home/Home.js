@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-import { loadAdRequest } from '../../../redux/adsRedux';
+import { getNewestAds, loadAdRequest } from '../../../redux/adsRedux';
 import AdCard from '../../features/AdCard/AdCard';
 import Searchbar from '../../features/Searchbar/Searchbar';
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
 	useEffect(() => {
 		dispatch(loadAdRequest());
 	}, [dispatch]);
-	const ads = useSelector((state) => state.ads);
+	const ads = useSelector(getNewestAds);
 
 	return (
 		<main className="text-center container d-flex flex-column justify-content-center">

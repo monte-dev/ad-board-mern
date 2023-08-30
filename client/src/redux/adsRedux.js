@@ -4,6 +4,11 @@ import { API_URL } from '../config';
 /* SELECTORS */
 
 export const getAllAds = (state) => state.ads;
+export const getNewestAds = (state) =>
+	state.ads
+		.slice()
+		.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+
 export const getAdById = ({ ads }, id) => ads.find((ad) => ad._id === id);
 
 /* ACTIONS */
