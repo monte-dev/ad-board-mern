@@ -18,7 +18,10 @@ const Home = () => {
 			<Searchbar></Searchbar>
 			<Row>
 				{ads.map((ad) => (
-					<Col key={ad._id}>
+					<Col
+						key={ad._id}
+						className="d-flex justify-content-center mx-3 my-2"
+					>
 						<AdCard ad={ad} />
 					</Col>
 				))}

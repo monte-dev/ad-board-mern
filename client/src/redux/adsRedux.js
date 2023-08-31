@@ -20,11 +20,16 @@ const LOAD_AD = createActionName('LOAD_AD');
 const ADD_AD = createActionName('ADD_AD');
 const EDIT_AD = createActionName('EDIT_AD');
 const REMOVE_AD = createActionName('REMOVE_AD');
+const LOAD_SEARCHED_AD = createActionName('LOAD_SEARCHED_AD');
 
 export const loadAd = (payload) => ({ type: LOAD_AD, payload });
 export const addAd = (payload) => ({ type: ADD_AD, payload });
 export const editAd = (payload) => ({ type: EDIT_AD, payload });
 export const removeAd = (payload) => ({ type: REMOVE_AD, payload });
+export const loadSearchedAd = (payload) => ({
+	type: LOAD_SEARCHED_AD,
+	payload,
+});
 
 /* THUNKS */
 
@@ -81,11 +86,22 @@ export const removeAdRequest = (adId) => {
 	};
 };
 
-/* INITIAL STATE */
-const initialState = [];
+export const loadSearchedAds = (searchPhrase) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get(
+				`${API_URL}/ads/search/${searchPhrase}`
+			);
+			console.log('dataaa', res.data);
+			dispatch(loadSearchedAd(res.data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
 
 // Reducer
-const adsReducer = (state = initialState, action) => {
+const adsReducer = (state = [], action) => {
 	switch (action.type) {
 		case LOAD_AD:
 			return [...action.payload];
@@ -100,7 +116,8 @@ const adsReducer = (state = initialState, action) => {
 
 		case REMOVE_AD:
 			return state.filter((ad) => ad._id !== action.payload);
-
+		case LOAD_SEARCHED_AD:
+			return [...state, action.payload];
 		default:
 			return state;
 	}
