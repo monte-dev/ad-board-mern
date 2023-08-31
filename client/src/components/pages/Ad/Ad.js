@@ -14,6 +14,11 @@ const Ad = ({ ad }) => {
 
 	return (
 		<div>
+			<div className="ad-detail--user">
+				<img alt="seller avatar" src={currentAd.seller.avatar}></img>
+				<p>{currentAd.seller.login}</p>
+				<p>{currentAd.seller.phoneNumber}</p>
+			</div>
 			<h2>{currentAd.title}</h2>
 			<p>{currentAd.publishedDate}</p>
 			<p>{currentAd.location}</p>
