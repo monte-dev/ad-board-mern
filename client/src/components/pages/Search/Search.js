@@ -1,34 +1,33 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { API_URL } from '../../../config';
-import { useEffect, useState } from 'react';
-import loadSearchedAd from '../../../redux/adsRedux';
-import { useDispatch } from 'react-redux';
-const Search = () => {
-	const { searchPhrase } = useParams();
-	console.log('Search parameter:', searchPhrase);
+import { loadSearchedAds } from '../../../redux/adsRedux';
+import AdCard from '../../features/AdCard/AdCard';
+
+const SearchResults = () => {
 	const dispatch = useDispatch();
+	const { searchPhrase } = useParams();
+	const ads = useSelector((state) => state.ads);
+	const searchedAds = ads.filter(
+		(ad) =>
+			ad.title.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+			ad.location.toLowerCase().includes(searchPhrase.toLowerCase())
+	);
 
 	useEffect(() => {
-		dispatch(loadSearchedAd(searchPhrase));
+		dispatch(loadSearchedAds(searchPhrase));
 	}, [dispatch, searchPhrase]);
-
-	const [searchResult, setSearchResult] = useState(null);
-
-	useEffect(() => {
-		fetch(`${API_URL}/ads/search/${searchPhrase}`)
-			.then((res) => res.json())
-			.then((searchedAds) => setSearchResult(searchedAds));
-	}, [searchPhrase]);
-
-	console.log('searched ads', searchResult);
-
-	if (!searchResult) return <div>{`no results for ${searchResult}`}</div>;
 
 	return (
 		<div>
-			<h1>You searched for: {searchPhrase}</h1>
+			<h2>Search results for: {searchPhrase}</h2>
+			<div className="ad-list">
+				{searchedAds.map((ad) => (
+					<AdCard key={ad._id} ad={ad} />
+				))}
+			</div>
 		</div>
 	);
 };
 
-export default Search;
+export default SearchResults;
