@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { API_URL } from '../../../config';
+
 const Register = () => {
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');

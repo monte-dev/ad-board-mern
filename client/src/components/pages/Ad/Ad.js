@@ -15,7 +15,8 @@ const Ad = ({ ad }) => {
 	return (
 		<div>
 			<div className="ad-detail--user">
-				<img alt="seller avatar" src={currentAd.seller.avatar}></img>
+				{/* FIX Bug copy files uploaded on server to client side */}
+				<img alt="seller avatar" src={`${process.env.PUBLIC_URL}/uploads/${currentAd.seller.avatar}`}></img>
 				<p>{currentAd.seller.login}</p>
 				<p>{currentAd.seller.phoneNumber}</p>
 			</div>
