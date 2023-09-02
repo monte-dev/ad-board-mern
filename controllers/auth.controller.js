@@ -60,10 +60,12 @@ exports.login = async (req, res) => {
 				res.status(400).send('Incorrect credentials');
 			} else {
 				if (bcrypt.compareSync(password, user.password)) {
+					// TODO BUG FIX -- NOT AUTHORIZED TO VIEW req.session.user on server AuthMiddleware
 					req.session.user = {
-						id: user._id,
+						id: user.id,
 						login: user.login,
 					};
+
 					res.status(200).send({ message: 'Login Successful' });
 				} else {
 					res.status(400).send('Incorrect credentials');

@@ -1,6 +1,6 @@
 /* SELECTORS */
 
-export const getCurrentUser = (state) => state.users;
+export const getCurrentUser = (state) => state.user;
 
 /* ACTIONS */
 

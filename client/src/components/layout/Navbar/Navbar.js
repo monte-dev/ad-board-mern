@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 const NavBar = () => {
 	const loggedIn = useSelector(getCurrentUser);
 	console.log(loggedIn);
+
+
 	return (
 		<>
 			<nav>
@@ -20,7 +22,7 @@ const NavBar = () => {
 						{loggedIn ? (
 							<>
 								<Nav.Link as={NavLink} to="/ad/add">
-									New notice
+									New Ad
 								</Nav.Link>
 								<Nav.Link as={NavLink} to="/logout">
 									Log out
