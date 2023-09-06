@@ -20,7 +20,7 @@ const userReducer = (state = null, action) => {
 			return action.payload
 
 		case LOG_OUT:
-			return [...state, action.payload];
+			return null;
 
 		default:
 			return state;

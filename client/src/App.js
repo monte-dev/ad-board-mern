@@ -10,6 +10,7 @@ import AdEdit from './components/pages/AdEdit/AdEdit';
 import AdRemove from './components/pages/AdRemove/AdRemove';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
+import Logout from './components/pages/Logout/Logout'
 import NotFound from './components/pages/NotFound/NotFound';
 import Register from './components/pages/Register/Register';
 import Search from './components/pages/Search/Search';
@@ -31,6 +32,7 @@ const App = () => {
 					></Route>
 					<Route path="/login" element={<Login />}></Route>
 					<Route path="/register" element={<Register />}></Route>
+					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="*" element={<NotFound />}></Route>
 				</Routes>
 				<Footer />

@@ -80,9 +80,18 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
+try {
 	res.send('logged in');
+} catch (error) {
+	res.status(500).json({message:error})
+}
 };
 
 exports.logout = async (req, res) => {
+try {
 	req.session.destroy();
+} catch (error) {
+	res.status(500).json({message:error})
+}
+
 };
