@@ -1,5 +1,7 @@
+const savedUser = JSON.parse(localStorage.getItem('user'))
+
 const initialState = {
     ads: [],
-    user:null
+    user: savedUser || null
 }
 export default initialState
