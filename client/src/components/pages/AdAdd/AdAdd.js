@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {Form, Button, Spinner, Alert} from 'react-bootstrap'
+import { API_URL } from '../../../config';
 
 const AdAdd = () => {
 const [title, setTitle] = useState('');
@@ -9,22 +10,58 @@ const [price, setPrice] = useState('');
 const [location, setLocation] = useState('');
  
 const [status, setStatus] = useState(null)
+const currentUser = localStorage.getItem('user');
+console.log('logged in user:', currentUser)
 
 const handleSubmit= (e) => {
 	console.log('added ad')
+	e.preventDefault();
+
+	const fd = new FormData()
+	fd.append('title', title)
+	fd.append('content', content)
+	fd.append('image',  image)
+	fd.append('price', price)
+	fd.append('location', location)
+	fd.append('seller', currentUser)
+	fd.append('publishedDate', Date.now())
+
+	const options = {
+		method: 'POST',
+		credentials: 'include',
+		body: fd,
+	}
+
+    setStatus('loading');
+    fetch(`${API_URL}/ads`, options)
+    .then(res => {
+      if(res.status === 201){
+        setStatus('success');
+      } else if(res.status === 400){
+        setStatus('clientError');
+      } else{
+        setStatus('serverError');
+      }
+    })
+	.catch((err) => {
+		console.log('------error-------', err);
+		setStatus('serverError');
+	});
+
 }
+
 
 	return (
 		<Form className='col-12 col-sm-8 mx-auto'onSubmit={handleSubmit}>
 			<h1 className='my-4'>Post an ad</h1>
 
-				{/* REGISTRATION ALERT MESSAGES */}
+				{/* ADDING AD ALERT MESSAGES */}
 
 
 			{status === 'clientError' && (
 				<Alert variant="danger">
-					<Alert.Heading>Incorrect login details</Alert.Heading>
-					<p>Incorrect password or login...</p>
+					<Alert.Heading>Missing/Incorrect data</Alert.Heading>
+					<p>All fields need to be correctly filled out.</p>
 				</Alert>
 			)}
 
@@ -34,7 +71,7 @@ const handleSubmit= (e) => {
 					role="status"
 					className="d-block mx-auto"
 				>
-					<span className="visually-hidden">Loading...</span>
+					<span className="visually-hidden">Adding ad...</span>
 				</Spinner>
 			)}
 
@@ -49,7 +86,7 @@ const handleSubmit= (e) => {
 			</Form.Group>
 			<Form.Group className='mb-3' controlId='formImage'>
 				<Form.Label>Image</Form.Label>
-				<Form.Control type='file' value={image} onChange={e => setImage(e.target.files[0])} placeholder='Upload picture of the property'></Form.Control>
+				<Form.Control type='file' onChange={e => setImage(e.target.files[0])} placeholder='Upload picture of the property'></Form.Control>
 			</Form.Group>
 			<Form.Group className='mb-3' controlId='formPrice'>
 				<Form.Label>Price</Form.Label>

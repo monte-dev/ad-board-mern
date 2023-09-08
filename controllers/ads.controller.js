@@ -66,6 +66,7 @@ exports.post = async (req, res) => {
 		res.status(500).json({ message: 'error', err });
 	}
 };
+
 exports.getBySearchPhrase = async (req, res) => {
 	try {
 		const ad = await Ad.find({

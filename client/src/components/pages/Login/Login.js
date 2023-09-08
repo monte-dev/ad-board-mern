@@ -29,7 +29,7 @@ const Login = () => {
 		.then((res) => {
 			if (res.status === 200) {
 				setStatus('success');
-				localStorage.setItem('user', JSON.stringify({login}));
+				localStorage.setItem('user', JSON.stringify(login));
 				dispatch(logIn({login}))
 				setTimeout(() => {
 					navigate('/')

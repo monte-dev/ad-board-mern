@@ -14,7 +14,7 @@ const Logout = () => {
       credentials: "include",
     };
 
-    fetch(`${API_URL}/logout`, options).then(() => {
+    fetch(`${API_URL}/auth/logout`, options).then(() => {
       dispatch(logOut());
       navigate("/");
     });

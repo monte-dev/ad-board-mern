@@ -90,6 +90,7 @@ try {
 exports.logout = async (req, res) => {
 try {
 	req.session.destroy();
+	res.redirect('/');
 } catch (error) {
 	res.status(500).json({message:error})
 }
