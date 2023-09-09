@@ -1,10 +1,11 @@
-const Ad = require('../models/ad.model');
 const fs = require('fs');
+const Ad = require('../models/ad.model');
 const sanitize = require('mongo-sanitize');
+const getImageFileType = require('../utils/getImageFileType');
 
 exports.getAll = async (req, res) => {
 	try {
-		const ads = await Ad.find().populate('seller');
+		const ads = await Ad.find().populate('title');
 		res.json(ads);
 	} catch (err) {
 		res.status(500).json({ message: err });
@@ -23,24 +24,20 @@ exports.getById = async (req, res) => {
 
 exports.post = async (req, res) => {
 	try {
-		const {
-			title,
-			content,
-			publishedDate,
-			image,
-			price,
-			location,
-			seller,
-		} = sanitize(req.body);
+		const { title, content, price, location } = req.body;
+		console.log('body', req.body);
 
+		const currentDate = new Date();
+		const formattedDate = currentDate.toLocaleDateString('en-US');
+		const seller = req.session.userId;
 		const fileType = req.file
 			? await getImageFileType(req.file)
 			: 'unknown';
 
+		console.log(fileType);
 		if (
 			title &&
 			content &&
-			publishedDate &&
 			req.file &&
 			['image/png', 'image/jpeg', 'image/gif'].includes(fileType) &&
 			price &&
@@ -48,14 +45,16 @@ exports.post = async (req, res) => {
 			seller
 		) {
 			const newAd = new Ad({
-				title,
-				content,
-				publishedDate,
+				title: title,
+				content: content,
+				publishedDate: formattedDate,
 				image: req.file.filename,
-				price,
-				location,
-				seller,
+				price: price,
+				location: location,
+				seller: seller,
 			});
+			console.log('seller', seller);
+			console.log('req.body', req.body);
 			await newAd.save();
 			res.json({ message: 'OK, ad added' });
 		} else {
@@ -63,7 +62,10 @@ exports.post = async (req, res) => {
 			res.status(400).send({ message: 'Bad request in post' });
 		}
 	} catch (err) {
-		res.status(500).json({ message: 'error', err });
+		console.error(err);
+		console.log('req.body', req.body);
+
+		res.status(500).json({ message: 'Internal Server Error' });
 	}
 };
 

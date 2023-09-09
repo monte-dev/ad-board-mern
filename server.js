@@ -2,16 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const formidable = require('express-formidable');
+const mongoose = require('mongoose');
 const db = require('./db');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const adsRoutes = require('./routes/ads.routes');
 const usersRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const mongoose = require('mongoose');
 
 const app = express();
-const server = app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT || 8000, () => {
 	console.log('Server is running...');
 });
 

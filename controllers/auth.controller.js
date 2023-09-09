@@ -60,13 +60,14 @@ exports.login = async (req, res) => {
 				res.status(400).send('Incorrect credentials');
 			} else {
 				if (bcrypt.compareSync(password, user.password)) {
-					// TODO BUG FIX -- NOT AUTHORIZED TO VIEW req.session.user on server AuthMiddleware
-					req.session.user = {
-						id: user.id,
-						login: user.login,
-					};
-
-					res.status(200).send({ message: 'Login Successful' });
+					req.session.login = user.login;
+					req.session.userId = user.id;
+					console.log(
+						req.session.login,
+						req.session.id,
+						req.session.userId
+					);
+					res.status(200).send({ message: 'Login successful' });
 				} else {
 					res.status(400).send('Incorrect credentials');
 				}
@@ -80,19 +81,17 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-try {
-	res.send('logged in');
-} catch (error) {
-	res.status(500).json({message:error})
-}
+	try {
+		res.send('logged in');
+	} catch (error) {
+		res.status(500).json({ message: error });
+	}
 };
 
 exports.logout = async (req, res) => {
-try {
-	req.session.destroy();
-	res.redirect('/');
-} catch (error) {
-	res.status(500).json({message:error})
-}
-
+	try {
+		await req.session.destroy();
+	} catch (error) {
+		res.status(500).json({ message: error });
+	}
 };
