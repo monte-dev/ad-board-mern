@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { API_URL } from '../../../config';
+import { useNavigate } from 'react-router-dom';
 const AdAdd = () => {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
@@ -10,7 +11,7 @@ const AdAdd = () => {
 	const [status, setStatus] = useState(null);
 	const currentUser = localStorage.getItem('user');
 	console.log('logged in user:', currentUser);
-
+	const navigate = useNavigate();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('added ad');
@@ -48,6 +49,9 @@ const AdAdd = () => {
 				console.log('------error-------', err);
 				setStatus('serverError');
 			});
+		setTimeout(() => {
+			navigate('/');
+		}, 1500);
 	};
 
 	return (

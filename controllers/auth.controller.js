@@ -88,6 +88,17 @@ exports.getUser = async (req, res) => {
 	}
 };
 
+exports.getUserById = async (req, res) => {
+	try {
+		console.log(req.session.login, req.session.id, req.session.userId);
+		const seller = await User.findById(req.params.id).populate('login');
+		if (!seller) res.status(404).json({ message: 'Not found a seller' });
+		else res.json(seller);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 exports.logout = async (req, res) => {
 	try {
 		await req.session.destroy();
