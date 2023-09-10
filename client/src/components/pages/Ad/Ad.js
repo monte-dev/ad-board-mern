@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Ad.css';
 import { getAdById } from '../../../redux/adsRedux';
 import { IMGS_URL } from '../../../config';
-import { loadSellerRequest } from '../../../redux/userRedux';
-
+import { loadSellerRequest } from '../../../redux/sellerRedux';
 const Ad = () => {
 	const { id } = useParams();
-	const sellerData = useSelector((state) => state.user.sellerData);
+	const sellerData = useSelector((state) => state.seller);
 	const currentAd = useSelector((state) => getAdById(state, id));
 
 	const dispatch = useDispatch();

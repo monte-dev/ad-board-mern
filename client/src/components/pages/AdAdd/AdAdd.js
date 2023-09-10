@@ -16,8 +16,6 @@ const AdAdd = () => {
 		e.preventDefault();
 		console.log('added ad');
 
-		// const currentDate = new Date();
-		// const formattedDate = currentDate.toISOString();
 		const fd = new FormData();
 		fd.append('title', title);
 		fd.append('content', content);

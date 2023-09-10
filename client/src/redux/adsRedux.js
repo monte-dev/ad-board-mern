@@ -31,8 +31,6 @@ export const loadSearchedAd = (payload) => ({
 	payload,
 });
 
-/* THUNKS */
-
 export const loadAdRequest = () => {
 	return async (dispatch) => {
 		try {
