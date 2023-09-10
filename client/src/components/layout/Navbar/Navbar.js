@@ -7,11 +7,10 @@ const NavBar = () => {
 	const loggedIn = useSelector(getCurrentUser);
 	console.log(loggedIn);
 
-
 	return (
 		<>
 			<nav>
-				<Navbar className="d-flex justify-content-between">
+				<Navbar className="d-flex justify-content-between bg-info rounded-top-3">
 					<Navbar.Brand as={NavLink} to="/">
 						Real Estate Listings
 					</Navbar.Brand>

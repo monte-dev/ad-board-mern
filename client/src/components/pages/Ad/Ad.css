@@ -1,3 +1,17 @@
+.ad-detail {
+	display: flex;
+}
+.ad-seller {
+	flex-basis: 30%;
+}
+.ad-detail--content {
+	flex-basis: 70%;
+}
+
+.ad-detail--image {
+	width: 300px;
+}
+
 .ad-seller--image {
 	width: 150px;
 	height: 175px;

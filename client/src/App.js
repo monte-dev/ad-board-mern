@@ -10,7 +10,7 @@ import AdEdit from './components/pages/AdEdit/AdEdit';
 import AdRemove from './components/pages/AdRemove/AdRemove';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
-import Logout from './components/pages/Logout/Logout'
+import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 import Register from './components/pages/Register/Register';
 import Search from './components/pages/Search/Search';
@@ -24,8 +24,8 @@ const App = () => {
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/ad/:id" element={<Ad />}></Route>
 					<Route path="/ad/add" element={<AdAdd />}></Route>
-					<Route path="/ad/edit/:id" element={<AdRemove />}></Route>
-					<Route path="/ad/remove/:id" element={<AdEdit />}></Route>
+					<Route path="/ad/edit/:id" element={<AdEdit />}></Route>
+					<Route path="/ad/remove/:id" element={<AdRemove />}></Route>
 					<Route
 						path="/search/:searchPhrase"
 						element={<Search />}

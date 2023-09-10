@@ -125,12 +125,14 @@ exports.deleteById = async (req, res) => {
 	try {
 		const ad = await Ad.findById(req.params.id);
 		if (ad) {
-			fs.unlinkSync(path.join(__dirname, '../public/uploads/', ad.image));
+			// fs.unlinkSync(path.join(__dirname, '../public/uploads/', ad.image));
 			await Ad.deleteOne({ _id: req.params.id });
+			res.json(ad);
 		} else {
 			res.status(404).json({ message: 'Ad not found...' });
 		}
 	} catch (err) {
+		console.log('error');
 		res.status(500).json({ message: err });
 	}
 };
