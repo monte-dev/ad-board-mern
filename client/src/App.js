@@ -7,7 +7,6 @@ import Footer from './components/layout/Footer/Footer';
 import Ad from './components/pages/Ad/Ad';
 import AdAdd from './components/pages/AdAdd/AdAdd';
 import AdEdit from './components/pages/AdEdit/AdEdit';
-import AdRemove from './components/pages/AdRemove/AdRemove';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import Logout from './components/pages/Logout/Logout';
@@ -25,7 +24,6 @@ const App = () => {
 					<Route path="/ad/:id" element={<Ad />}></Route>
 					<Route path="/ad/add" element={<AdAdd />}></Route>
 					<Route path="/ad/edit/:id" element={<AdEdit />}></Route>
-					<Route path="/ad/remove/:id" element={<AdRemove />}></Route>
 					<Route
 						path="/search/:searchPhrase"
 						element={<Search />}

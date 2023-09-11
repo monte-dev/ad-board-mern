@@ -43,8 +43,8 @@ const Register = () => {
 	};
 
 	return (
-		<Form className="mt-5 col-12 col-sm-4 mx-auto" onSubmit={handleSubmit}>
-			<h1 className="my-4">Sign Up to add your ad!</h1>
+		<Form className="mt-5 col-12 col-sm-6 mx-auto" onSubmit={handleSubmit}>
+			<h1 className="my-4 text-center">Sign up now</h1>
 
 			{/* REGISTRATION ALERT MESSAGES */}
 			{status === 'success' && (

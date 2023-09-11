@@ -1,4 +1,23 @@
+import React from 'react';
+import '../../../styles/App.css';
 const Footer = () => {
-	return <div>Footer</div>;
+	return (
+		<footer className="bg-dark text-light py-3 fixed-bottom">
+			<div className="container text-center d-flex justify-content-center">
+				<p className="me-2">Made by </p>
+				<p>
+					<a
+						className="footer-link"
+						href="https://github.com/monte-dev"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="fab fa-github"></i>
+					</a>
+				</p>
+			</div>
+		</footer>
+	);
 };
+
 export default Footer;

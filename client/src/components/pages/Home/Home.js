@@ -4,6 +4,8 @@ import { Row, Col } from 'react-bootstrap';
 import { getNewestAds, loadAdRequest } from '../../../redux/adsRedux';
 import AdCard from '../../features/AdCard/AdCard';
 import Searchbar from '../../features/Searchbar/Searchbar';
+import './Home.css';
+
 const Home = () => {
 	const dispatch = useDispatch();
 
@@ -14,15 +16,16 @@ const Home = () => {
 
 	return (
 		<main className="text-center container d-flex flex-column justify-content-center">
-			<h2 className="mb-4">Ads</h2>
-			<Searchbar></Searchbar>
+			<h2 className="home-title">Ads</h2>
+			<Searchbar />
+
 			<Row>
 				{ads.map((ad) => (
 					<Col
 						key={ad._id}
 						className="d-flex justify-content-center mx-3 my-2"
 					>
-						<AdCard ad={ad} />
+						<AdCard className="card" ad={ad} />
 					</Col>
 				))}
 			</Row>

@@ -31,6 +31,7 @@ const Login = () => {
 				if (res.status === 200) {
 					setStatus('success');
 					localStorage.setItem('user', login);
+
 					dispatch(logIn({ login }));
 					navigate('/');
 				} else if (res.status === 400) {
@@ -48,6 +49,8 @@ const Login = () => {
 	return (
 		<Form className="col-12 col-sm-4 mx-auto" onSubmit={handleSubmit}>
 			<h1 className="my-4">Login</h1>
+			<p className="text-center">test account:</p>
+			<p className="text-center">'JohnDoe3' , 'tester3'</p>
 
 			{/* REGISTRATION ALERT MESSAGES */}
 			{status === 'success' && (

@@ -36,7 +36,7 @@ app.use(
 		secret: `${process.env.DB_SECRET}`,
 		store: MongoStore.create(mongoose.connection),
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 		cookie: {
 			secure: process.env.NODE_ENV == 'production',
 		},
