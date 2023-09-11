@@ -8,7 +8,7 @@ import { getAdById } from '../../../redux/adsRedux';
 const AdEdit = () => {
 	const { id } = useParams();
 	const currentAd = useSelector((state) => getAdById(state, id));
-	console.log('this add', currentAd);
+
 	const [title, setTitle] = useState(currentAd.title);
 	const [content, setContent] = useState(currentAd.content);
 	const [image, setImage] = useState(currentAd.image);
@@ -19,16 +19,17 @@ const AdEdit = () => {
 	const currentUser = localStorage.getItem('user');
 	const sellerData = useSelector((state) => state.seller);
 	const loggedInUser = useSelector((state) => state.user);
+
 	console.log(loggedInUser);
-	console.log(currentUser);
 
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (!currentAd || !sellerData || currentAd.seller !== sellerData._id) {
 			navigate('/');
 		}
 	}, [currentAd, sellerData, navigate]);
-	console.log('ad id:', id);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -44,38 +45,43 @@ const AdEdit = () => {
 			method: 'PUT',
 			body: fd,
 		};
+
 		setStatus('loading');
+
 		fetch(`${API_URL}/ads/${id}`, options)
 			.then((res) => {
 				if (res.status === 201) {
 					setStatus('success');
+					setTimeout(() => {
+						navigate('/');
+					}, 1500);
 				} else if (res.status === 400) {
 					setStatus('clientError');
 				} else {
-					console.log('FormData Content: after', [...fd.entries()]);
-
 					setStatus('serverError');
 				}
 			})
 			.catch((err) => {
-				console.log('------error-------', err);
 				setStatus('serverError');
 			});
-		// setTimeout(() => {
-		// 	navigate('/');
-		// }, 1500);
 	};
 
 	return (
 		<Form className="col-12 col-sm-8 mx-auto" onSubmit={handleSubmit}>
 			<h1 className="my-4">Edit an ad</h1>
 
-			{/* ADDING AD ALERT MESSAGES */}
-
+			{/* EDITING AD ALERT MESSAGES */}
 			{status === 'clientError' && (
 				<Alert variant="danger">
 					<Alert.Heading>Missing/Incorrect data</Alert.Heading>
 					<p>All fields need to be correctly filled out.</p>
+				</Alert>
+			)}
+
+			{status === 'serverError' && (
+				<Alert variant="danger">
+					<Alert.Heading>Server Error</Alert.Heading>
+					<p>An unexpected error occurred while editing the ad.</p>
 				</Alert>
 			)}
 
@@ -85,7 +91,7 @@ const AdEdit = () => {
 					role="status"
 					className="d-block mx-auto"
 				>
-					<span className="visually-hidden">Adding ad...</span>
+					<span className="visually-hidden">Editing ad...</span>
 				</Spinner>
 			)}
 

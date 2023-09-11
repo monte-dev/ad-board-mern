@@ -9,7 +9,8 @@ const connectToDB = () => {
 	if (NODE_ENV === 'production')
 		dbUri = `mongodb+srv://admin:${process.env.DB_PASS}@${process.env.DB_CONNECTION}`;
 	else dbUri = 'mongodb://localhost:27017/adBoardApp';
-
+	// else
+	// dbUri = `mongodb+srv://admin:${process.env.DB_PASS}@${process.env.DB_CONNECTION}`;
 	// connect to DB
 	mongoose.connect(dbUri, {
 		useNewUrlParser: true,

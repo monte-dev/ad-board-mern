@@ -10,7 +10,9 @@ const AdAdd = () => {
 	const [location, setLocation] = useState('');
 	const [status, setStatus] = useState(null);
 	const currentUser = localStorage.getItem('user');
+
 	const navigate = useNavigate();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -27,26 +29,26 @@ const AdAdd = () => {
 			credentials: 'include',
 			body: fd,
 		};
+
 		setStatus('loading');
+
 		fetch(`${API_URL}/ads`, options)
 			.then((res) => {
-				if (res.status === 201) {
+				if (res.status === 200) {
 					setStatus('success');
+					setTimeout(() => {
+						navigate('/');
+					}, 1500);
 				} else if (res.status === 400) {
 					setStatus('clientError');
 				} else {
-					console.log('FormData Content: after', [...fd.entries()]);
-
+					console.log('servererrrrrrrrrr');
 					setStatus('serverError');
 				}
 			})
 			.catch((err) => {
-				console.log('------error-------', err);
 				setStatus('serverError');
 			});
-		setTimeout(() => {
-			navigate('/');
-		}, 1500);
 	};
 
 	return (
@@ -54,11 +56,17 @@ const AdAdd = () => {
 			<h1 className="my-4">Post an ad</h1>
 
 			{/* ADDING AD ALERT MESSAGES */}
-
 			{status === 'clientError' && (
 				<Alert variant="danger">
 					<Alert.Heading>Missing/Incorrect data</Alert.Heading>
 					<p>All fields need to be correctly filled out.</p>
+				</Alert>
+			)}
+
+			{status === 'serverError' && (
+				<Alert variant="danger">
+					<Alert.Heading>Server Error</Alert.Heading>
+					<p>An unexpected error occurred while adding the ad.</p>
 				</Alert>
 			)}
 

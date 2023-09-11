@@ -32,7 +32,7 @@ const Ad = () => {
 					console.log('deleted');
 					setTimeout(() => {
 						navigate('/');
-					}, 1000);
+					}, 300);
 				} else {
 					throw new Error('Network response was not ok');
 				}

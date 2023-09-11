@@ -34,7 +34,7 @@ exports.post = async (req, res) => {
 			? await getImageFileType(req.file)
 			: 'unknown';
 
-		console.log(fileType);
+		console.log('filetype------', fileType);
 		if (
 			title &&
 			content &&
@@ -58,11 +58,16 @@ exports.post = async (req, res) => {
 			await newAd.save();
 			res.json({ message: 'OK, ad added' });
 		} else {
-			fs.unlinkSync(`../public/uploads/${req.file.filename}`);
+			fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+			console.log('seller--------', seller);
+			console.log('req.body', req.body);
+			console.log('session--------', req.session);
 			res.status(400).send({ message: 'Bad request in post' });
 		}
 	} catch (err) {
-		console.error(err);
+		console.error('error message', err);
+		console.log('seller????????', seller);
+
 		console.log('req.body', req.body);
 
 		res.status(500).json({ message: 'Internal Server Error' });
