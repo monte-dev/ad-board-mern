@@ -32,9 +32,7 @@ const Login = () => {
 					setStatus('success');
 					localStorage.setItem('user', login);
 					dispatch(logIn({ login }));
-					setTimeout(() => {
-						navigate('/');
-					}, 2500);
+					navigate('/');
 				} else if (res.status === 400) {
 					setStatus('clientError');
 				} else {
