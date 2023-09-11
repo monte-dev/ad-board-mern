@@ -52,19 +52,19 @@ const AdAdd = () => {
 	};
 
 	return (
-		<Form className="col-12 col-sm-8 mx-auto" onSubmit={handleSubmit}>
+		<Form className="col-12 col-sm-8 mx-auto my-4" onSubmit={handleSubmit}>
 			<h1 className="my-4">Post an ad</h1>
 
 			{/* ADDING AD ALERT MESSAGES */}
 			{status === 'clientError' && (
-				<Alert variant="danger">
+				<Alert variant="danger" className="my-3">
 					<Alert.Heading>Missing/Incorrect data</Alert.Heading>
 					<p>All fields need to be correctly filled out.</p>
 				</Alert>
 			)}
 
 			{status === 'serverError' && (
-				<Alert variant="danger">
+				<Alert variant="danger" className="my-3">
 					<Alert.Heading>Server Error</Alert.Heading>
 					<p>An unexpected error occurred while adding the ad.</p>
 				</Alert>
@@ -74,57 +74,59 @@ const AdAdd = () => {
 				<Spinner
 					animation="border"
 					role="status"
-					className="d-block mx-auto"
+					className="d-block mx-auto my-3"
 				>
 					<span className="visually-hidden">Adding ad...</span>
 				</Spinner>
 			)}
 
-			<Form.Group className="mb-3" controlId="formTitle">
-				<Form.Label>Title: </Form.Label>
+			<Form.Group controlId="formTitle" className="mb-3">
+				<Form.Label>Title:</Form.Label>
 				<Form.Control
 					type="text"
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
-					placeholder="Enter the title for your property."
-				></Form.Control>
+					placeholder="Enter the title for your property"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formContent">
-				<Form.Label>Description: </Form.Label>
+			<Form.Group controlId="formContent" className="mb-3">
+				<Form.Label>Description:</Form.Label>
 				<Form.Control
 					type="text"
+					as="textarea"
+					rows={4}
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
-					placeholder="Enter a description for your property."
-				></Form.Control>
+					placeholder="Enter a description for your property"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formImage">
-				<Form.Label>Image</Form.Label>
+			<Form.Group controlId="formImage" className="mb-3">
+				<Form.Label>Image:</Form.Label>
 				<Form.Control
 					type="file"
 					onChange={(e) => setImage(e.target.files[0])}
 					placeholder="Upload picture of the property"
-				></Form.Control>
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formPrice">
-				<Form.Label>Price</Form.Label>
+			<Form.Group controlId="formPrice" className="mb-3">
+				<Form.Label>Price:</Form.Label>
 				<Form.Control
 					type="number"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
-					placeholder="Enter the asking price."
-				></Form.Control>
+					placeholder="Enter the asking price"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formLocation">
-				<Form.Label>Location</Form.Label>
+			<Form.Group controlId="formLocation" className="mb-3">
+				<Form.Label>Location:</Form.Label>
 				<Form.Control
 					type="text"
 					value={location}
 					onChange={(e) => setLocation(e.target.value)}
-					placeholder="Enter location of your property."
-				></Form.Control>
+					placeholder="Enter location of your property"
+				/>
 			</Form.Group>
-			<Button variant="primary" type="submit">
+			<Button variant="primary" type="submit" className="my-3">
 				Post for free!
 			</Button>
 		</Form>

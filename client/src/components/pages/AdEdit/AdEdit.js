@@ -20,8 +20,6 @@ const AdEdit = () => {
 	const sellerData = useSelector((state) => state.seller);
 	const loggedInUser = useSelector((state) => state.user);
 
-	console.log(loggedInUser);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -50,7 +48,7 @@ const AdEdit = () => {
 
 		fetch(`${API_URL}/ads/${id}`, options)
 			.then((res) => {
-				if (res.status === 201) {
+				if (res.status === 200) {
 					setStatus('success');
 					setTimeout(() => {
 						navigate('/');
@@ -67,19 +65,22 @@ const AdEdit = () => {
 	};
 
 	return (
-		<Form className="col-12 col-sm-8 mx-auto" onSubmit={handleSubmit}>
-			<h1 className="my-4">Edit an ad</h1>
+		<Form
+			className="col-12 col-sm-8 mx-auto my-4 edit-ad-form"
+			onSubmit={handleSubmit}
+		>
+			<h1>Edit an Ad</h1>
 
 			{/* EDITING AD ALERT MESSAGES */}
 			{status === 'clientError' && (
-				<Alert variant="danger">
-					<Alert.Heading>Missing/Incorrect data</Alert.Heading>
+				<Alert variant="danger" className="my-3">
+					<Alert.Heading>Missing/Incorrect Data</Alert.Heading>
 					<p>All fields need to be correctly filled out.</p>
 				</Alert>
 			)}
 
 			{status === 'serverError' && (
-				<Alert variant="danger">
+				<Alert variant="danger" className="my-3">
 					<Alert.Heading>Server Error</Alert.Heading>
 					<p>An unexpected error occurred while editing the ad.</p>
 				</Alert>
@@ -89,57 +90,58 @@ const AdEdit = () => {
 				<Spinner
 					animation="border"
 					role="status"
-					className="d-block mx-auto"
+					className="d-block mx-auto my-3"
 				>
 					<span className="visually-hidden">Editing ad...</span>
 				</Spinner>
 			)}
 
-			<Form.Group className="mb-3" controlId="formTitle">
-				<Form.Label>Title: </Form.Label>
+			<Form.Group controlId="formTitle">
+				<Form.Label className="mt-3">Title:</Form.Label>
 				<Form.Control
 					type="text"
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
-					placeholder="Enter the title for your property."
-				></Form.Control>
+					placeholder="Enter the title for your property"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formContent">
-				<Form.Label>Description: </Form.Label>
+			<Form.Group controlId="formContent">
+				<Form.Label className="mt-3">Description:</Form.Label>
 				<Form.Control
-					type="text"
+					as="textarea"
+					rows={4}
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
-					placeholder="Enter a description for your property."
-				></Form.Control>
+					placeholder="Enter a description for your property"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formImage">
-				<Form.Label>Image</Form.Label>
+			<Form.Group controlId="formImage">
+				<Form.Label className="mt-3">Image:</Form.Label>
 				<Form.Control
 					type="file"
 					onChange={(e) => setImage(e.target.files[0])}
-					placeholder="Upload picture of the property"
-				></Form.Control>
+					accept="image/*"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formPrice">
-				<Form.Label>Price</Form.Label>
+			<Form.Group controlId="formPrice">
+				<Form.Label className="mt-3">Price:</Form.Label>
 				<Form.Control
 					type="number"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
-					placeholder="Enter the asking price."
-				></Form.Control>
+					placeholder="Enter the asking price"
+				/>
 			</Form.Group>
-			<Form.Group className="mb-3" controlId="formLocation">
-				<Form.Label>Location</Form.Label>
+			<Form.Group controlId="formLocation">
+				<Form.Label className="mt-3">Location:</Form.Label>
 				<Form.Control
 					type="text"
 					value={location}
 					onChange={(e) => setLocation(e.target.value)}
-					placeholder="Enter location of your property."
-				></Form.Control>
+					placeholder="Enter location of your property"
+				/>
 			</Form.Group>
-			<Button variant="primary" type="submit">
+			<Button variant="primary" type="submit" className="my-3">
 				Save Changes
 			</Button>
 		</Form>
