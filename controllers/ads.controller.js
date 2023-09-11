@@ -58,7 +58,7 @@ exports.post = async (req, res) => {
 			await newAd.save();
 			res.json({ message: 'OK, ad added' });
 		} else {
-			fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+			fs.unlinkSync(`../public/uploads/${req.file.filename}`);
 			res.status(400).send({ message: 'Bad request in post' });
 		}
 	} catch (err) {
@@ -79,41 +79,43 @@ exports.getBySearchPhrase = async (req, res) => {
 		res.status(500).json({ message: err });
 	}
 };
+
 exports.updateById = async (req, res) => {
 	try {
-		const {
-			title,
-			content,
-			publishedDate,
-			image,
-			price,
-			location,
-			seller,
-		} = sanitize(req.body);
+		const { title, content, image, price, location } = sanitize(req.body);
 		const fileType = req.file
 			? await getImageFileType(req.file)
 			: 'unknown';
 
 		const ad = await Ad.findById(req.params.id);
 		if (ad) {
-			ad.title = title;
-			ad.content = content;
-			ad.publishedDate = publishedDate;
+			if (title !== undefined) {
+				ad.title = title;
+			}
+			if (content !== undefined) {
+				ad.content = content;
+			}
 			if (
 				req.file &&
 				['image/png', 'image/jpeg', 'image/gif'].includes(fileType)
 			) {
-				fs.unlinkSync(
-					path.join(__dirname, '../public/uploads/', ad.image)
-				);
 				ad.image = req.file.filename;
 			}
-			ad.price = price;
-			ad.location = location;
-			ad.seller = seller;
+			const currentDate = new Date();
+			const formattedDate = currentDate.toLocaleDateString('en-US');
+
+			ad.publishedDate = formattedDate;
+			if (price !== undefined) {
+				ad.price = price;
+			}
+			if (location !== undefined) {
+				ad.location = location;
+			}
+
 			const modifiedAd = await ad.save();
 			res.json(modifiedAd);
 		} else {
+			fs.unlinkSync(path.join(`../public/uploads/${req.file.filename}`));
 			res.status(404).json({ message: 'Ad not found...' });
 		}
 	} catch (err) {
@@ -125,7 +127,8 @@ exports.deleteById = async (req, res) => {
 	try {
 		const ad = await Ad.findById(req.params.id);
 		if (ad) {
-			// fs.unlinkSync(path.join(__dirname, '../public/uploads/', ad.image));
+			fs.unlinkSync(`./public/uploads/${ad.image}`);
+
 			await Ad.deleteOne({ _id: req.params.id });
 			res.json(ad);
 		} else {

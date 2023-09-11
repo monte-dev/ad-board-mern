@@ -15,14 +15,12 @@ const Ad = () => {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	console.log(currentAd);
 
 	useEffect(() => {
 		if (currentAd) {
 			dispatch(loadSellerRequest(currentAd.seller));
 		}
 	}, [dispatch, currentAd]);
-	console.log(id);
 
 	const handleBtnRemove = () => {
 		const options = {
@@ -46,6 +44,11 @@ const Ad = () => {
 				);
 			});
 	};
+
+	const handleBtnEdit = (id) => {
+		navigate(`/ad/edit/${id}`);
+	};
+
 	if (!currentAd || !sellerData) {
 		return (
 			<div className="my-5 text-center">
@@ -62,7 +65,11 @@ const Ad = () => {
 					{loggedInUser !== null &&
 					sellerData.login === loggedInUser.login ? (
 						<div className="mb-2">
-							<Button variant="info" className="w-25">
+							<Button
+								variant="info"
+								className="w-35"
+								onClick={() => handleBtnEdit(currentAd._id)}
+							>
 								Edit
 							</Button>
 							<Button

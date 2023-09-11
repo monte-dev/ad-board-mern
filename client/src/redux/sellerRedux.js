@@ -14,7 +14,6 @@ export const loadSellerRequest = (sellerId) => {
 	return async (dispatch) => {
 		try {
 			let res = await axios.get(`${API_URL}/auth/user/${sellerId}`);
-			console.log(res);
 			dispatch(loadSeller(res.data));
 		} catch (err) {
 			console.log(err);

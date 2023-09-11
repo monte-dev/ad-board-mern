@@ -10,11 +10,9 @@ const AdAdd = () => {
 	const [location, setLocation] = useState('');
 	const [status, setStatus] = useState(null);
 	const currentUser = localStorage.getItem('user');
-	console.log('logged in user:', currentUser);
 	const navigate = useNavigate();
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log('added ad');
 
 		const fd = new FormData();
 		fd.append('title', title);
@@ -23,7 +21,6 @@ const AdAdd = () => {
 		fd.append('price', price);
 		fd.append('location', location);
 		fd.append('seller', currentUser);
-		console.log('FormData Content:', [...fd.entries()]);
 
 		const options = {
 			method: 'POST',
