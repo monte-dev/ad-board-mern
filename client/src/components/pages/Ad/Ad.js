@@ -5,7 +5,7 @@ import './Ad.css';
 import { getAdById } from '../../../redux/adsRedux';
 import { API_URL, IMGS_URL } from '../../../config';
 import { loadSellerRequest } from '../../../redux/sellerRedux';
-import { Button, Spinner } from 'react-bootstrap';
+import { Row, Col, Button, Spinner } from 'react-bootstrap';
 
 const Ad = () => {
 	const { id } = useParams();
@@ -60,51 +60,72 @@ const Ad = () => {
 
 	return (
 		<>
-			<div className="ad-detail mt-4">
-				<div className="ad-seller d-flex flex-column">
-					{loggedInUser !== null &&
-					sellerData.login === loggedInUser.login ? (
-						<div className="mb-2">
-							<Button
-								variant="info"
-								className="w-35"
-								onClick={() => handleBtnEdit(currentAd._id)}
-							>
-								Edit
-							</Button>
-							<Button
-								variant="danger"
-								className="ms-1 w-35"
-								onClick={() => handleBtnRemove(currentAd._id)}
-							>
-								Delete
-							</Button>
-						</div>
-					) : (
-						<></>
-					)}
-					<img
-						className="ad-seller--image"
-						alt="seller avatar"
-						src={`${IMGS_URL}${sellerData.avatar}`}
-					></img>
+			<Row className="ad-container">
+				{/* Seller Information */}
+				<Col md={4} xs={12}>
+					<div className="ad-seller-info mb-4">
+						{loggedInUser !== null &&
+						sellerData.login === loggedInUser.login ? (
+							<div className="mb-2">
+								<Button
+									variant="info"
+									className="ad-btn"
+									onClick={() => handleBtnEdit(currentAd._id)}
+								>
+									Edit
+								</Button>
+								<Button
+									variant="danger"
+									className="ad-btn"
+									onClick={() =>
+										handleBtnRemove(currentAd._id)
+									}
+								>
+									Delete
+								</Button>
+							</div>
+						) : (
+							<></>
+						)}
+						<img
+							className="ad-seller-image"
+							alt="seller avatar"
+							src={`${IMGS_URL}${sellerData.avatar}`}
+						></img>
+						<p>{sellerData.login}</p>
+						<p>{sellerData.phoneNumber}</p>
+					</div>
+				</Col>
 
-					<p>{sellerData.login}</p>
-					<p>{sellerData.phoneNumber}</p>
-				</div>
-				<div className="ad-detail--content">
-					<h2>{currentAd.title}</h2>
-					<p>{currentAd.publishedDate}</p>
-					<img
-						src={`${IMGS_URL}${currentAd.image}`}
-						className="ad-detail--image"
-						alt="house ad"
-					></img>
-					<p>{currentAd.location}</p>
-					<p>${currentAd.price.toLocaleString()}</p>
-					<p>{currentAd.content}</p>
-				</div>
-			</div>
+				{/* Ad Details */}
+				<Col md={8} xs={12}>
+					<div className="ad-detail-content">
+						<h2 className="ad-detail-title">{currentAd.title}</h2>
+						<p className="ad-detail-date">
+							{`Posted: ${currentAd.publishedDate}`}
+						</p>
+						<img
+							src={`${IMGS_URL}${currentAd.image}`}
+							className="ad-detail-image img-fluid"
+							alt="house ad"
+						></img>
+						<div className="ad-detail-info">
+							<p className="ad-detail-location">
+								<i className="fas fa-map-marker-alt"></i>{' '}
+								{currentAd.location}
+							</p>
+							<p className="ad-detail-price">
+								<i className="fas fa-dollar-sign"></i>
+								{currentAd.price.toLocaleString()}
+							</p>
+							<div className="ad-description">
+								<h4>About property:</h4>
+								<p>{currentAd.content}</p>
+							</div>
+						</div>
+					</div>
+				</Col>
+			</Row>
 		</>
 	);
 };

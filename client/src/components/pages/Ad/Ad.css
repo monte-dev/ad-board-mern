@@ -1,19 +1,75 @@
-.ad-detail {
-	display: flex;
-}
-.ad-seller {
-	flex-basis: 30%;
-}
-.ad-detail--content {
-	flex-basis: 70%;
+.ad-container {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.ad-detail--image {
-	width: 300px;
+.ad-seller-info {
+	background-color: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	text-align: center;
 }
 
-.ad-seller--image {
-	width: 150px;
-	height: 175px;
+.ad-btn {
+	width: 100%;
+	max-width: 150px;
+	margin: 8px;
+	margin-top: 10px;
+}
+
+.ad-seller-image {
+	width: 160px;
+	height: 185px;
 	margin-bottom: 0.5rem;
+	border-radius: 50%;
+}
+
+.ad-detail-content {
+	background-color: #f8f9fa;
+}
+
+.ad-detail-title {
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 10px;
+	padding: 1rem 1rem 0rem 1rem;
+}
+
+.ad-detail-date {
+	font-size: 14px;
+	color: #777;
+	margin-bottom: 20px;
+	padding: 0 1rem;
+}
+.ad-detail-info {
+	margin-top: 20px;
+	padding: 0 1rem 2rem 1rem;
+}
+.ad-detail-location i {
+	margin-right: 5px;
+	color: #007bff;
+}
+
+.ad-detail-price i {
+	margin-right: 5px;
+	color: #28a745;
+}
+
+.ad-detail-info h4 {
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.ad-detail-info p {
+	font-size: 16px;
+	color: #555;
+}
+.ad-image {
+	width: 100%;
+	max-width: 800px;
 }
