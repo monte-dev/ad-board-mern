@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo');
 const adsRoutes = require('./routes/ads.routes');
 const usersRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
+require('dotenv').config();
 
 const app = express();
 app.listen(process.env.PORT || 8000, () => {
@@ -32,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	session({
-		secret: 'xyz567',
+		secret: `${process.env.DB_SECRET}`,
 		store: MongoStore.create(mongoose.connection),
 		resave: false,
 		saveUninitialized: false,
