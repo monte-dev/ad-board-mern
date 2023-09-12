@@ -13,12 +13,13 @@ import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 import Register from './components/pages/Register/Register';
 import Search from './components/pages/Search/Search';
+import './styles/App.css';
 
 const App = () => {
 	return (
 		<main>
-			<Container>
-				<Header />
+			<Header />
+			<Container className="wrapper">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/ad/:id" element={<Ad />}></Route>
@@ -33,8 +34,8 @@ const App = () => {
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="*" element={<NotFound />}></Route>
 				</Routes>
-				<Footer />
 			</Container>
+			<Footer />
 		</main>
 	);
 };

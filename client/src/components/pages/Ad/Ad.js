@@ -60,7 +60,7 @@ const Ad = () => {
 
 	return (
 		<>
-			<Row className="ad-container">
+			<Row className="ad-container mb-3">
 				{/* Seller Information */}
 				<Col md={4} xs={12}>
 					<div className="ad-seller-info mb-4">

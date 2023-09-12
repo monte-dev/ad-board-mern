@@ -10,7 +10,7 @@ const NavBar = () => {
 	return (
 		<>
 			<nav>
-				<Navbar className="d-flex justify-content-between bg-info rounded-top-3">
+				<Navbar className="d-flex justify-content-between bg-info rounded-top-3 px-3">
 					<Navbar.Brand as={NavLink} to="/">
 						Real Estate Listings
 					</Navbar.Brand>

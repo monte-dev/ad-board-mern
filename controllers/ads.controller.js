@@ -66,7 +66,6 @@ exports.post = async (req, res) => {
 		}
 	} catch (err) {
 		console.error('error message', err);
-		console.log('seller????????', seller);
 
 		console.log('req.body', req.body);
 

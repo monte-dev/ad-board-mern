@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { API_URL } from '../../../config';
 import { useNavigate } from 'react-router-dom';
+
 const AdAdd = () => {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');

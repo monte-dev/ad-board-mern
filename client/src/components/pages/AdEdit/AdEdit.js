@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { API_URL } from '../../../config';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getAdById } from '../../../redux/adsRedux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editAdRequest, getAdById } from '../../../redux/adsRedux';
 
 const AdEdit = () => {
 	const { id } = useParams();
@@ -21,6 +21,7 @@ const AdEdit = () => {
 	const loggedInUser = useSelector((state) => state.user);
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (!currentAd || !sellerData || currentAd.seller !== sellerData._id) {
@@ -50,6 +51,7 @@ const AdEdit = () => {
 			.then((res) => {
 				if (res.status === 200) {
 					setStatus('success');
+					dispatch(editAdRequest(id, fd));
 					setTimeout(() => {
 						navigate('/');
 					}, 1500);
@@ -66,7 +68,7 @@ const AdEdit = () => {
 
 	return (
 		<Form
-			className="col-12 col-sm-8 mx-auto my-4 edit-ad-form"
+			className="col-12 col-sm-8 mx-auto my-5 pb-3 edit-ad-form"
 			onSubmit={handleSubmit}
 		>
 			<h1>Edit an Ad</h1>
