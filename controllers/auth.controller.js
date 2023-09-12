@@ -101,13 +101,9 @@ exports.getUserById = async (req, res) => {
 
 exports.logout = async (req, res) => {
 	try {
-		console.log('good');
-		console.log(req.session);
 		await req.session.destroy();
 		res.status(200).json({ message: 'Logout successful' });
 	} catch (error) {
-		console.log('bad');
-		console.log(req.session);
 		console.error('Logout error:', error);
 
 		res.status(500).json({ message: error });

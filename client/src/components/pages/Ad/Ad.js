@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Ad.css';
-import { getAdById } from '../../../redux/adsRedux';
+import { getAdById, removeAdRequest } from '../../../redux/adsRedux';
 import { API_URL, IMGS_URL } from '../../../config';
 import { loadSellerRequest } from '../../../redux/sellerRedux';
 import { Row, Col, Button, Spinner } from 'react-bootstrap';
@@ -30,6 +30,7 @@ const Ad = () => {
 			.then((res) => {
 				if (res.status === 200) {
 					console.log('deleted');
+					dispatch(removeAdRequest(id));
 					setTimeout(() => {
 						navigate('/');
 					}, 300);
